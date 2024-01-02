@@ -8,11 +8,13 @@ import { useNavigate } from "react-router-dom";
 function TaskList() {
   let [tasks, setTasks] = useState([]);
   let navigate = useNavigate();
+  let [check, setCheck] = useState(true)
 
   const fetchTasks = async () => {
     const res = await axios.get("http://localhost:3000/tasks");
     const data = res.data;
     setTasks(data);
+
   };
   useEffect(() => {
     fetchTasks();
@@ -27,6 +29,10 @@ function TaskList() {
   const Navigate = (id) => {
     navigate(`/edit/${id}`);
   };
+
+  const checkboxHandler = (task)=>{
+    axios.put(`http://localhost:3000/tasks/${task.id}`,{ ...task,isCompleted: !task.isCompleted}).then(()=>fetchTasks())
+  }
 
   return (
     <div className={style.tasklist}>
@@ -71,8 +77,10 @@ function TaskList() {
                 </td>
                 <td className={style.td}>
                   <input
+                    checked={task.isCompleted}
                     className={style.checkbox}
                     type="checkbox"
+                    onChange={()=>checkboxHandler(task)}
                     name=""
                     id=""
                   />

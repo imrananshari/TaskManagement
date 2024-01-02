@@ -48,7 +48,9 @@ const Edit = () => {
 
   return (
     <div id={style.myForm}>
+     
       <form action="">
+      <h1 style={{marginTop:"15px"}}>Edite Task</h1>
         <div className={style.tr}>
           <div className="label">
             <label htmlFor="">Task Name</label>

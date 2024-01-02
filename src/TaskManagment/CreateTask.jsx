@@ -38,7 +38,7 @@ const CreateTask = () => {
     }
 
     axios
-      .post("http://localhost:3000/tasks", { taskName, desc, deadline })
+      .post("http://localhost:3000/tasks", { taskName, desc, deadline ,isCompleted:false})
       .then(() => {
         
         navigate("/task-list");
